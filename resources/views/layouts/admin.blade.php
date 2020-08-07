@@ -17,7 +17,6 @@
       
       
         @include('layouts.footer')
-      
     </div>
   </div>
 
@@ -26,5 +25,8 @@
       {{--  End Sidebar Filters --}}
  
     @include('layouts.scripts')
+
+    
+
 </body>
 </html>

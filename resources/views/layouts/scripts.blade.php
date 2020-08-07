@@ -1,4 +1,5 @@
  <!--   Core JS Files   -->
+  @yield('custom_footer')
   <script src="{{ asset('../assets/js/core/jquery.min.js')}}"></script>
   <script src="{{ asset('../assets/js/core/popper.min.js')}}"></script>
   <script src="{{ asset('../assets/js/core/bootstrap-material-design.min.js')}}"></script>
@@ -28,13 +29,13 @@
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
   <script src="{{asset('../assets/js/plugins/nouislider.min.js')}}"></script>
   <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-  <script src="{{asset('../../../cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js')}}"></script>
+  {{-- <script src="{{asset('../../../cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js')}}"></script> --}}
   <!-- Library for adding dinamically elements -->
   <script src="{{asset('../assets/js/plugins/arrive.min.js')}}"></script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Yno10-YTnLjjn_Vtk0V8cdcY5lC4plU"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
-  <script async defer src="{{asset('../../../buttons.github.io/buttons.js')}}"></script>
+  {{-- <script async defer src="{{asset('../../../buttons.github.io/buttons.js')}}"></script> --}}
   <!-- Chartist JS -->
   <script src="{{asset('../assets/js/plugins/chartist.min.js')}}"></script>
   <!--  Notifications Plugin    -->
@@ -43,6 +44,45 @@
   <script src="{{asset('../assets/js/material-dashboard.min1c51.js?v=2.1.2')}}" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="{{asset('../assets/demo/demo.js')}}"></script>
+
+  @yield('custom_scripts')
+    <script>
+    $(document).ready(function() {
+      $('#datatables').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        }
+      });
+
+      var table = $('#datatable').DataTable();
+
+      // Edit record
+      table.on('click', '.edit', function() {
+        $tr = $(this).closest('tr');
+        var data = table.row($tr).data();
+        alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+      });
+
+      // Delete a record
+      table.on('click', '.remove', function(e) {
+        $tr = $(this).closest('tr');
+        table.row($tr).remove().draw();
+        e.preventDefault();
+      });
+
+      //Like record
+      table.on('click', '.like', function() {
+        alert('You clicked on Like button');
+      });
+    });
+  </script>
   <script>
     $(document).ready(function() {
       $().ready(function() {
@@ -215,7 +255,7 @@
     });
   </script>
   <!-- Sharrre libray -->
-  <script src="../assets/demo/jquery.sharrre.js"></script>
+  <script src="{{asset('../assets/demo/jquery.sharrre.js')}}"></script>
   <script>
     $(document).ready(function() {
 
@@ -287,7 +327,7 @@
         t.async = !0;
         t.src = v;
         s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s)
+        s.parentNode.insertBefore(t, s);
       }(window,
         document, 'script', '../../../connect.facebook.net/en_US/fbevents.js');
 
@@ -318,7 +358,6 @@
       t.async = !0;
       t.src = v;
       s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s)
     }(window,
       document, 'script', '../../../connect.facebook.net/en_US/fbevents.js');
 
