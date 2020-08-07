@@ -65,11 +65,11 @@
 
                             @if($user->id == Auth::user()->id)
                             @else
-                            <form action="{{route('adminuser.destroy' , $user->id)}}" method="POST">
+                           {{--  <form action="{{route('adminuser.destroy' , $user->id)}}" method="POST">
                             @csrf
-                            @method('DELETE')
-                             <button type="submit" class="btn btn-link btn-danger btn-just-icon remove deleteUser" data-userid="{{$user->id}}"><i class="material-icons">close</i></button>
-                             </form>
+                            @method('DELETE') --}}
+                             <button type="submit" class="btn btn-link btn-danger btn-just-icon remove " onclick="deleteUser({{$user->id}})" data-userid="{{$user->id}}"><i class="material-icons">close</i></button>
+                           {{--   </form> --}}
                            @endif
                           </td>
                         </tr>
@@ -84,28 +84,27 @@
             </div>
             <!-- end col-md-12 -->
           </div>
-{{-- <div id="applicantDeleteModal" class="modal modal-danger fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog" style="width:55%;">
-        <div class="modal-content">
-             <form action="" method="POST" class="remove-record-model">
+  <div id="applicantDeleteModal" class="modal modal-danger fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog" style="width:55%;">
+          <div class="modal-content">
+               <form action="" method="POST" id="deleteForm" class="remove-record-model">
+                @csrf
+                @method('delete')
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title text-center" id="custom-width-modalLabel">Delete Applicant Record</h4>
+              </div>
+              <div class="modal-body">
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger waves-effect remove-data-from-delete-form">Delete</button>
+              </div>
 
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title text-center" id="custom-width-modalLabel">Delete Applicant Record</h4>
-            </div>
-            <div class="modal-body">
-                <h4>You Want You Sure Delete This Record?</h4>
-                <input type="hidden", name="applicant_id" id="app_id">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger waves-effect remove-data-from-delete-form">Delete</button>
-            </div>
-
-             </form>
-        </div>
-    </div>
-</div> --}}
+               </form>
+          </div>
+      </div>
+  </div>
 @endsection	
 
   <script src="../../assets/js/core/jquery.min.js"></script>
@@ -151,6 +150,14 @@
   <script src="../../assets/js/material-dashboard.min1c51.js?v=2.1.2" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../../assets/demo/demo.js"></script>
+
+  <script type="text/javascript">
+    function deleteUser(id){
+      var url = '{{route('adminuser.index' )}}/'+id;
+       $('#applicantDeleteModal').modal('show'); 
+       $('#deleteForm').attr('action', url);
+    }
+  </script>
   <script>
     $(document).ready(function() {
       $().ready(function() {
@@ -553,10 +560,12 @@
     App.dataTables();
   });
 </script>
-{{-- <script>
+<script>
+
 $(document).on('click','.deleteUser',function(){
     var userID=$(this).attr('data-userid');
+    console.log($(this).attr('data-userid'));   
     $('#app_id').val(userID); 
     $('#applicantDeleteModal').modal('show'); 
 });
-</script> --}}
+</script>
