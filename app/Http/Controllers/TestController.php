@@ -1,31 +1,38 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Services\UserService;
-use File;
 
-class UserController extends Controller
+class TestController extends Controller
 {
-    protected $userService;
+
+     protected $userService;
 
    function __construct(UserService $userService)
     {
       $this->userService = $userService;
     }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {   
+        return view('test');
+    }
+    public function getData($id=0)
     {
-        $users = User::all();
-        return view('admin.user.index', compact('users'));
+        if ($id == 0) {
+            $arr['data'] = User::all();
+        }else{
+            $arr['data'] = User::where('id', $id)->first();
+        }
+        echo json_encode($arr);
+        exit;
     }
 
     /**
@@ -66,25 +73,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function type($id, $type)
+    public function edit($id)
     {
-        $user = User::find($id);
-        $user->type = $type;
-        $user->update();
-        return redirect()->back(); 
-    }
-   
-    public function favorite($id, $status)
-    {
-        $user = User::find($id);
-        $user->favorite = $status;
-        $user->update();
-        return redirect()->back();
-    }
-    public function favoriteUser()
-    {   
-        $users = User::where('favorite', 1)->get();
-        return view('admin.user.favorite', compact('users'));
+        //
     }
 
     /**
@@ -96,11 +87,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $user= User::find($id);
-        
-
+        //
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -108,10 +97,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $this->userService->deleteUserById($id);
-        return redirect()->back()->with('danger', 'User Deleted Succesfully');
-    }
-
+    {  
+       $this->userService->deleteUserById($id);
+       return redirect()->back();
+    } 
 
 }

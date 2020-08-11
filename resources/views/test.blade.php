@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<?php 
+{{-- <?php 
 use App\User;
 
   $users = User::all();
@@ -14,52 +14,181 @@ use App\User;
     array('name' => 'Parim', 'age' => 18, 'id'=> 2),
     array('name' => 'Diart', 'age' => 17, 'id'=> 3),
    ];
- ?>
+ ?> --}}
 <!-- Button trigger modal -->
-<button class="btn btn-rose btn-fill" onclick="demo.showSwal('success-message')">Try me!<div class="ripple-container"></div></button>
+{{-- <button class="btn btn-rose btn-fill" onclick="demo.showSwal('success-message')">Try me!<div class="ripple-container"></div></button>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Launch demo modal
-</button>
+</button> --}}
 
-{{-- @foreach($users as $user)
-  <p>{{$user['name']}} eshte: {{$user['id']}} <button onclick="showModal({{$user->id}},  '{{$user->name}}')" class="btn btn-success">Ndrysho</button></p>
-@endforeach --}}
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-     <div aria-labelledby="swal2-title" aria-describedby="swal2-content" class="swal2-popup swal2-modal swal2-show" tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="display: flex;">
-      <div class="swal2-header">
-          <ul class="swal2-progresssteps" style="display: none;"></ul>
-          <div class="swal2-icon swal2-error" style="display: none;"><span class="swal2-x-mark"><span class="swal2-x-mark-line-left"></span><span class="swal2-x-mark-line-right"></span></span></div>
-          <div class="swal2-icon swal2-question" style="display: none;"><span class="swal2-icon-text">?</span></div>
-          <div class="swal2-icon swal2-warning swal2-animate-warning-icon" style="display: flex;"><span class="swal2-icon-text">!</span></div>
-          <div class="swal2-icon swal2-info" style="display: none;"><span class="swal2-icon-text">i</span></div>
-          <div class="swal2-icon swal2-success" style="display: none;">
-              <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div><span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
-              <div class="swal2-success-ring"></div>
-              <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
-              <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
-          </div><img class="swal2-image" style="display: none;">
-          <h2 class="swal2-title" style="display: flex;">Are you sure?</h2><button type="button" class="swal2-close" style="display: none;">×</button>
+{{--   <div id="exampleModal" class="modal modal-danger fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog" style="width:55%;">
+          <div class="modal-content">
+               <form action="" method="POST" id="editForm" class="remove-record-model">
+                @csrf
+                @method('PATCH')
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title text-center" id="modalLabel">Delete User</h4>
+              </div>
+              <div id="message" class="modal-body">
+                <input id="name-input" type="text" name="name" class="form-control">
+                <input id="id-input" type="text" name="name" class="form-control">
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger waves-effect remove-data-from-delete-form">Delete</button>
+              </div>
+
+               </form>
+          </div>
       </div>
-      <div class="swal2-content">
-          <div id="swal2-content" style="display: block;">You won't be able to revert this!</div><input class="swal2-input" style="display: none;"><input type="file" class="swal2-file" style="display: none;">
-      </div>
-        <div class="swal2-actions" style="display: flex;"><button type="button" class="swal2-confirm btn btn-success" aria-label="">Yes, delete it!</button>   
-          <button type="button" data-dismiss="modal" class="swal2-cancel btn btn-danger" aria-label="" style="display: inline-block;">Cancel</button>
-        </div>
-        </div>
-    </div>
-  </div>
+  </div> --}}
 
      {{--   <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
                   <button type="submit" class="btn btn-danger waves-effect remove-data-from-delete-form">Delete</button>
  --}}
+     {{-- <input  type='button' class="btn btn-rose" value='Fetch all records' id='fetchAllRecord'> --}}
+
+ 
+     <!-- Script -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- jQuery CDN -->
+ 
+     <div class="container-fluid">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-icon card-header-rose">
+                    <div class="card-icon">
+                      <i class="material-icons">assignment</i>
+                    </div>
+                    <h4 class="card-title ">Simple Table</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table" id='userTable' style='border-collapse: collapse;'>
+                        <thead class=" text-primary">
+                          <tr><th>
+                            ID
+                          </th>
+                          <th>
+                            Name
+                          </th> 
+                          <th>
+                            E-mail
+                          </th>
+                          <th>
+                            Delete
+                          </th>
+                        </tr></thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+     <script type='text/javascript'>
+     $(document).ready(function(){
+         // function fetchRecords(id) {
+        
+          $.ajax({
+         url: 'getData/'+0,
+         type: 'get',
+         dataType: 'json',
+         success: function(response){
+ 
+           var len = 0;
+           $('#userTable tbody').empty(); // Empty <tbody>
+           if(response['data'] != null){
+             len = response['data'].length;
+           }
+ 
+           if(len > 0){
+             for(var i=0; i<len; i++){
+               var id = response['data'][i].id;
+               var name = response['data'][i].name;
+               var email = response['data'][i].email;
+ 
+               var tr_str = "<tr >" +
+                   "<td >" + id + "</td>" +
+                   "<td >" + name + "</td>" +
+                   "<td >" + email + "</td>" +
+                   "<td >" + "<button onclick='deleteUser("+id+")' class='btn btn-danger'>Delete</button>" + "</td>" +
+               "</tr>";
+ 
+               $("#userTable tbody").append(tr_str);
+             }
+           }else if(response['data'] != null){
+              var tr_str = "<tr>" +
+                  "<td >1</td>" +
+                  "<td >" + response['data'].name + "</td>" +
+                  "<td >" + response['data'].email + "</td>" +
+              "</tr>";
+ 
+              $("#userTable tbody").append(tr_str);
+           }else{
+              var tr_str = "<tr>" +
+                  "<td align='center' colspan='4'>No record found.</td>" +
+              "</tr>";
+ 
+              $("#userTable tbody").append(tr_str);
+           }
+ 
+         }
+       });
+ 
+         // }
+       // Fetch all records
+       // $('#fetchAllRecord').click(function(){
+       //        fetchRecords(0);
+       //        $(this).hide();
+       // });
+    
+     });
+ 
+     </script>
+    <script type="text/javascript">
+        function deleteUser(id){
+              $.ajax({
+              url: 'test/' + id ,
+              type: 'DELETE',
+              data: {
+                  "_token": "{{ csrf_token() }}",
+              },
+              cache: false,
+              dataType: 'json',
+              success: function(data) {
+                  var myJSON = new Array(JSON.stringify(data));
+                  var obj = JSON.parse(myJSON);
+                  alert('Deleted with success');
+                 
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+        }
+      </script>
+
 
 @endsection
-<script type="text/javascript">
-  function showModal(id, name) {
+{{-- <script type="text/javascript">
+  function editModal(id, name) {
+     var url = '{{route('adminuser.index' )}}/'+id;
      $('#exampleModal').modal('show'); 
+     $('#editModalForm').attr('action', url);
      $('#user-name').text("Are you sure you want to delete: "+ name);
+     $('#name-input').attr('value', name);
+     $('#id-input').attr('value', id);
   }
 </script>
+ --}}
+
+
+
