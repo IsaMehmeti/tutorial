@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-{{-- <?php 
+<?php 
 use App\User;
 
   $users = User::all();
@@ -14,7 +14,7 @@ use App\User;
     array('name' => 'Parim', 'age' => 18, 'id'=> 2),
     array('name' => 'Diart', 'age' => 17, 'id'=> 3),
    ];
- ?> --}}
+ ?>
 <!-- Button trigger modal -->
 {{-- <button class="btn btn-rose btn-fill" onclick="demo.showSwal('success-message')">Try me!<div class="ripple-container"></div></button>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -53,6 +53,13 @@ use App\User;
 
  
      <!-- Script -->
+     <div style="display: none;" class="alert alert-danger" id="notify" >
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <i class="material-icons">close</i>
+                    </button>
+                    <span id="notifyText">
+                      </span>
+    </div>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- jQuery CDN -->
  
      <div class="container-fluid">
@@ -83,8 +90,14 @@ use App\User;
                             Delete
                           </th>
                         </tr></thead>
+                          @foreach($users as $user)
                         <tbody>
+                          <td>{{$user->id}}</td>
+                          <td>{{$user->name}}</td>
+                          <td>{{$user->email}}</td>
+                          <td><button class="btn btn-danger">Delete</button></td>
                         </tbody>
+                          @endforeach
                       </table>
                     </div>
                   </div>
@@ -93,88 +106,113 @@ use App\User;
             </div>
           </div>
         </div>
-     <script type='text/javascript'>
-     $(document).ready(function(){
-         // function fetchRecords(id) {
-        
-          $.ajax({
-         url: 'getData/'+0,
-         type: 'get',
-         dataType: 'json',
-         success: function(response){
- 
-           var len = 0;
-           $('#userTable tbody').empty(); // Empty <tbody>
-           if(response['data'] != null){
-             len = response['data'].length;
-           }
- 
-           if(len > 0){
-             for(var i=0; i<len; i++){
-               var id = response['data'][i].id;
-               var name = response['data'][i].name;
-               var email = response['data'][i].email;
- 
-               var tr_str = "<tr >" +
-                   "<td >" + id + "</td>" +
-                   "<td >" + name + "</td>" +
-                   "<td >" + email + "</td>" +
-                   "<td >" + "<button onclick='deleteUser("+id+")' class='btn btn-danger'>Delete</button>" + "</td>" +
-               "</tr>";
- 
-               $("#userTable tbody").append(tr_str);
-             }
-           }else if(response['data'] != null){
-              var tr_str = "<tr>" +
-                  "<td >1</td>" +
-                  "<td >" + response['data'].name + "</td>" +
-                  "<td >" + response['data'].email + "</td>" +
+        <script type="text/javascript">
+            $('table tbody tr').each(function(){
+              $(this).find()
+            });
+        </script>
+    <!--  <script type='text/javascript'>
+    $(document).ready(function(){
+        // function fetchRecords(id) {
+       
+         $.ajax({
+        url: 'getData/'+0,
+        type: 'get',
+        dataType: 'json',
+        success: function(response){
+     
+          var len = 0;
+          $('#userTable tbody').empty(); // Empty <tbody>
+          if(response['data'] != null){
+            len = response['data'].length;
+          }
+     
+          if(len > 0){
+            for(var i=0; i<len; i++){
+              var id = response['data'][i].id;
+              var name = response['data'][i].name;
+              var email = response['data'][i].email;
+     
+              var tr_str = "<tr id='changeLine"+id+"'>" +
+                  "<td >" + id + "</td>" +
+                  "<td >" + name + "</td>" +
+                  "<td >" + email + "</td>" +
+                  "<td >" + "<button onclick=deleteUser("+ id + ',' +"'"+name+"') class='btn btn-danger'>Delete</button>" + "</td>" +
               "</tr>";
- 
+     
               $("#userTable tbody").append(tr_str);
-           }else{
-              var tr_str = "<tr>" +
-                  "<td align='center' colspan='4'>No record found.</td>" +
-              "</tr>";
- 
-              $("#userTable tbody").append(tr_str);
-           }
- 
-         }
-       });
- 
-         // }
-       // Fetch all records
-       // $('#fetchAllRecord').click(function(){
-       //        fetchRecords(0);
-       //        $(this).hide();
-       // });
-    
-     });
- 
-     </script>
-    <script type="text/javascript">
-        function deleteUser(id){
-              $.ajax({
-              url: 'test/' + id ,
-              type: 'DELETE',
-              data: {
-                  "_token": "{{ csrf_token() }}",
-              },
-              cache: false,
-              dataType: 'json',
-              success: function(data) {
-                  var myJSON = new Array(JSON.stringify(data));
-                  var obj = JSON.parse(myJSON);
-                  alert('Deleted with success');
-                 
-              },
-              error: function(error) {
-                  console.log(error);
-              }
-          });
+            }
+          }else if(response['data'] != null){
+             var tr_str = "<tr>" +
+                 "<td >1</td>" +
+                 "<td >" + response['data'].name + "</td>" +
+                 "<td >" + response['data'].email + "</td>" +
+             "</tr>";
+     
+             $("#userTable tbody").append(tr_str);
+          }else{
+             var tr_str = "<tr>" +
+                 "<td align='center' colspan='4'>No record found.</td>" +
+             "</tr>";
+     
+             $("#userTable tbody").append(tr_str);
+          }
         }
-      </script>
+      });
+     
+        // }
+      // Fetch all records
+      // $('#fetchAllRecord').click(function(){
+      //        fetchRecords(0);
+      //        $(this).hide();
+      // });
+        
+    });
+     
+    </script>
+        <script type="text/javascript">
+     function showNotificationn(from, align, name){
+    
+             $.notify({
+                 icon: "add_alert",
+                 message:  name + "Was Deleted Successfully "
+    
+             },{
+                 type: 'danger',
+                 timer: 5000,
+                 placement: {
+                     from: from,
+                     align: align
+                 }
+             });
+             }
+    
+       function deleteUser(id, name){
+             $.ajax({
+             url: 'test/' + id ,
+             type: 'DELETE',
+             data: {
+                 "_token": "{{ csrf_token() }}",
+             },
+             cache: false,
+             dataType: 'json',
+             success: function(data) {
+             /*  $("#notify").show().delay(2000).queue(function(n) {
+               $(this).hide(); n();
+               });*/
+               // $('#notifyText').text(name + ' was deleted Successfuly');
+               $('#changeLine' + id).hide();
+                showNotificationn('top','right', name);
+    
+             
+                
+             },
+             error: function(error) {
+                 console.log(error);
+             }
+         });
+       }
+     </script> -->
 
 
 @endsection
@@ -188,7 +226,18 @@ use App\User;
      $('#id-input').attr('value', id);
   }
 </script>
+
+
+
+ function deleteUser(id, name){
+          var url = '{{route('adminuser.index' )}}/'+id;
+           $('#applicantDeleteModal').modal('show'); 
+           $('#deleteForm').attr('action', url);
+           $('#form').attr('action', url);
+           $('#message').text('Are u sure you want to delete: ' + name);
+           $('#modalLabel').text('User: ' + id);
  --}}
+
 
 
 

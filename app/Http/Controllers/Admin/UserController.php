@@ -110,7 +110,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $this->userService->deleteUserById($id);
-        return redirect()->back()->with('danger', 'User Deleted Succesfully');
+        return response()->json();
     }
 
 

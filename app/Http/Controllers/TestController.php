@@ -21,11 +21,12 @@ class TestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {    
         return view('test');
     }
     public function getData($id=0)
-    {
+    {   
+
         if ($id == 0) {
             $arr['data'] = User::all();
         }else{
@@ -99,7 +100,9 @@ class TestController extends Controller
     public function destroy($id)
     {  
        $this->userService->deleteUserById($id);
-       return redirect()->back();
+       return response()->json();
     } 
+
+
 
 }

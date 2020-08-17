@@ -32,7 +32,7 @@
                   
                       <tbody>
                         @foreach($users as $user)
-                        <tr>
+                        <tr id="row{{$user->id}}">
                           <td>{{$user->id}}</td>
                           <td>  <div class="photo">
                           @if(isset($user->image))
@@ -57,7 +57,7 @@
                              @if($user->favorite == 1)
                              <button id="changeButton_{{$user->id}}" type="submit" onclick="change({{$user->id}},0)"  class="btn btn-link btn-info btn-just-icon like"><i id="icon_{{$user->id}}" class="material-icons">favorite</i></button> 
                              @else
-                              <button id="changeButton_{{$user->id}}" type="submit" onclick="change({{$user->id}},1),demo.showSwal('success-message')"  class="btn btn-link btn-info btn-just-icon like"><i id="icon_{{$user->id}}" class="material-icons icon-image-preview">favorite_border</i></button> 
+                              <button id="changeButton_{{$user->id}}" type="submit" onclick="change({{$user->id}},1)"  class="btn btn-link btn-info btn-just-icon like"><i id="icon_{{$user->id}}" class="material-icons icon-image-preview">favorite_border</i></button> 
                              @endif
                             
                           </td>
@@ -66,7 +66,7 @@
 
                             @if($user->id == Auth::user()->id)
                             @else
-                             <button type="submit" class="btn btn-link btn-danger btn-just-icon remove " onclick="deleteUser({{$user->id}},  '{{$user->name}}')" ><i class="material-icons">close</i></button>
+                             <button type="submit" class="btn btn-link btn-danger btn-just-icon remove " onclick="showModal({{$user->id}},  '{{$user->name}}')" ><i class="material-icons">close</i></button>
                            @endif
                           </td>
                         </tr>
@@ -84,9 +84,7 @@
   <div id="applicantDeleteModal" class="modal modal-danger fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
       <div class="modal-dialog" style="width:55%;">
           <div class="modal-content">
-               <form action="" method="POST" id="deleteForm" class="remove-record-model">
-                @csrf
-                @method('delete')
+               
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <h4 class="modal-title text-center" id="modalLabel">Delete User</h4>
@@ -107,16 +105,67 @@
 
 
 @section('custom_scripts')
+
+<!-- <script>
+  $('table tbody tr').each(function(){
+    $(this).find()
+  });
+</script> -->
       <script type="text/javascript">
-        function deleteUser(id, name){
+        //Show Modal From Delete User Button
+        function showModal(id, name){
           var url = '{{route('adminuser.index' )}}/'+id;
            $('#applicantDeleteModal').modal('show'); 
-           $('#deleteForm').attr('action', url);
+           $('.remove-data-from-delete-form').attr('onclick', 'deleteUser('+id + ',' + "'"+ name + "'" + ')');
            $('#message').text('Are u sure you want to delete: ' + name);
            $('#modalLabel').text('User: ' + id);
         }
-      </script>
-    <script type="text/javascript">
+        //Nofitications After Delete
+        function showNotificationn(from, align, name){
+
+            $.notify({
+                icon: "add_alert",
+                message:  name + " Deleted Successfully "
+
+            },{
+                type: 'danger',
+                timer: 5000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+            }
+
+        //deleteUserAJAX
+        function deleteUser(id, name){
+          var url = '{{route('adminuser.index' )}}/'+id;
+          $.ajax({
+               url: url,
+              type: 'DELETE',
+              data: {
+                  "_token": "{{ csrf_token() }}",
+              },
+              cache: false,
+              dataType: 'json',
+              success: function(data) {
+              /*  $("#notify").show().delay(2000).queue(function(n) {
+                $(this).hide(); n();
+                });*/
+                // $('#notifyText').text(name + ' was deleted Successfuly');
+                $('#row'+id).remove();
+                  $('#applicantDeleteModal').find('button[data-dismiss="modal"]').click();
+                 showNotificationn('top','right', name);
+
+              
+                 
+              },
+                                error: function(error) {
+                  console.log(error);
+              }
+          });
+        }
+
           //Change user Type
       function changeStatus(id, type) {
           $.ajax({
@@ -150,7 +199,7 @@
               }
           });
       }
-
+      //User Favorite
       function change(id, status) {
           $.ajax({
               url: '/admin/user/favorite/' + id + '/' + status,
