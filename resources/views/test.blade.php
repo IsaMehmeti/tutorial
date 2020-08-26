@@ -1,4 +1,6 @@
 @extends('layouts.admin')
+@section('page_name', 'Test')
+
 
 @section('custom_head')
 
@@ -7,8 +9,10 @@
 @section('content')
 <?php 
 use App\User;
+use App\Models\Blog;
 
   $users = User::all();
+  $blogs = Blog::all();
    $usersssss = [
     array('name' => 'Isa', 'age' => 18, 'id'=> 1),
     array('name' => 'Parim', 'age' => 18, 'id'=> 2),
@@ -53,15 +57,49 @@ use App\User;
 
  
      <!-- Script -->
-     <div style="display: none;" class="alert alert-danger" id="notify" >
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <i class="material-icons">close</i>
-                    </button>
-                    <span id="notifyText">
-                      </span>
-    </div>
+  {{-- <p id="heading"></p> --}}
+
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- jQuery CDN -->
- 
+    <div class="col-md-6">
+              <div class="card ">
+                <div class="card-header card-header-rose card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">mail_outline</i>
+                  </div>
+                  <h4 class="card-title">Stacked Form</h4>
+                </div>
+                <div class="card-body ">
+                  {{-- <form action="{{route('test.store')}}" method="POST">
+                    @csrf --}}
+                    <div class="form-group bmd-form-group">
+                      <label for="exampleEmail" class="bmd-label-floating"> Name</label>
+                      <input type="text" id="title" name="title" class="form-control" id="exampleEmail">
+                    </div>
+                      {{-- <div class="form-group bmd-form-group">
+                        <label for="exampleEmail" class="bmd-label-floating">Email Address</label>
+                        <input type="text" id="email" name="email" class="form-control" id="exampleEmail">
+                      </div>
+                      <div class="form-group bmd-form-group">
+                        <label for="examplePass" class="bmd-label-floating">Password</label>
+                        <input type="text" id="password" name="password" class="form-control" id="examplePass">
+                      </div>
+                      <div class="form-group bmd-form-group">
+                        <label for="examplePass" class="bmd-label-floating">Password-Confirmation</label>
+                        <input type="text" id="password_confirmation" name="password-confirmation" class="form-control" id="examplePass">
+                      </div>
+                      <div class="form-check">
+                     
+                      </div> --}}
+                </div>
+                <div class="card-footer ">
+                  <button id="insert" type="submit" class="btn btn-fill btn-rose">Submit</button>
+                </div>
+                {{-- </form> --}}
+              </div>
+            </div>
+{{-- sajkdaklsdaodskasdlkjadlkajdklahjaslkh qiuodhaosdhmaoidhoaidhjmapodmoadhmadosaldjaldsj --}}
+
+
      <div class="container-fluid">
           <div class="container-fluid">
             <div class="row">
@@ -77,27 +115,22 @@ use App\User;
                     <div class="table-responsive">
                       <table class="table" id='userTable' style='border-collapse: collapse;'>
                         <thead class=" text-primary">
-                          <tr><th>
-                            ID
-                          </th>
+                          <tr>
                           <th>
                             Name
                           </th> 
                           <th>
-                            E-mail
-                          </th>
-                          <th>
                             Delete
                           </th>
                         </tr></thead>
-                          @foreach($users as $user)
                         <tbody>
-                          <td>{{$user->id}}</td>
-                          <td>{{$user->name}}</td>
-                          <td>{{$user->email}}</td>
+                          @foreach($blogs as $blog)
+                          <tr>
+                          <td>{{$blog->title}}</td>
                           <td><button class="btn btn-danger">Delete</button></td>
+                        </tr>
+                        @endforeach
                         </tbody>
-                          @endforeach
                       </table>
                     </div>
                   </div>
@@ -106,11 +139,70 @@ use App\User;
             </div>
           </div>
         </div>
+      
         <script type="text/javascript">
-            $('table tbody tr').each(function(){
-              $(this).find()
+ 
+              $(document).ready(function() {
+                $('#insert').on('click', function() {
+                  var title = $('#title').val();
+                  var url = '{{route('test.store' )}}';
+                  if(title!=""){
+                      $.ajax({
+                          url: url,
+                          type: "POST",
+                          data: {
+                              "_token": "{{ csrf_token() }}",
+                              title: title,
+                          },
+                          cache: false,
+                          success: function(data){
+                            var blog = data['blog']
+                            $('tbody').prepend("<tr><td>" + title + "</td>" + "<td><button class='btn btn-danger'>Delete</button><td>" + "</tr>");
+                              $("input[type=text]").val("");
+                              console.log(blog['id']);
+                          }
+                      });
+                  }
+                  else{
+                      showNotificationn('top','right');
+                  }
+              });
             });
-        </script>
+               function showNotificationn(from, align){
+    
+             $.notify({
+                 icon: "add_alert",
+                 message:  "Type something please."
+    
+             },{
+                 type: 'danger',
+                 timer: 5000,
+                 placement: {
+                     from: from,
+                     align: align
+                 }
+             });
+             }
+              // $('#heading').html('Height:' + e.clientY + ' Width:' + e.clientX );
+              // // $(this).find('tbody td:first-child ').append('Aded from jquery');
+            $('.btn-danger').on('click', function(){
+              if (confirm('Are u sure')) {
+                  alert('hello');
+              }else{
+                  alert('bye');
+
+              }
+            });
+
+</script>
+        <script type="text/javascript"></script>
+           <!--  $('.table tbody tr').each(function(){
+               
+             $(this).find('.btn').click(function(){
+               var id = $(this).parent().parent().find('.id').attr('data-id');
+               console.log(id)
+             })
+           }); -->
     <!--  <script type='text/javascript'>
     $(document).ready(function(){
         // function fetchRecords(id) {

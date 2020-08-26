@@ -83,7 +83,13 @@ class BlogsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $blog = Blog::findOrFail($id);
+        $blog->title = $data['title'];
+        $blog->desc = $data['desc'];
+        $blog->update();
+        return response()->json($blog);
+
     }
 
     /**
@@ -93,7 +99,8 @@ class BlogsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        $this->blogServices->deleteBlogById($id);
+        return redirect()->back();
     }
 }

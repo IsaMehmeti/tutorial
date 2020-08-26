@@ -30,15 +30,6 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <label class="col-sm-2 col-form-label">Date: </label>
-                      <div class="col-sm-10">
-                        <div class="form-group bmd-form-group">
-                        <input name="date" type="date" class="form-control datepicker" value="10/06/2018">
-                          <span class="bmd-help">Today's Date.</span>
-                        </div>
-                      </div>
-                    </div>
                        <div class="row">
                       <label class="col-sm-2 col-form-label">Image: </label>
                       <div class="col-sm-10">

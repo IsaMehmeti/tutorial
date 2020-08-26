@@ -22,9 +22,9 @@
         <li class="adjustments-line">
           <a href="javascript:void(0)" class="switch-trigger background-color">
             <div class="ml-auto mr-auto">
-              <span class="badge filter badge-black active" data-background-color="black"></span>
-              <span class="badge filter badge-white" data-background-color="white"></span>
-              <span class="badge filter badge-red" data-background-color="red"></span>
+              <span id="black" class="badge filter badge-black active" data-background-color="black"></span>
+              <span id="white" class="badge filter badge-white" data-background-color="white"></span>
+              <span id="red" class="badge filter badge-red" data-background-color="red"></span>
             </div>
             <div class="clearfix"></div>
           </a>

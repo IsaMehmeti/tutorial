@@ -20,8 +20,9 @@ Route::put('profile/update/{id}', 'UserController@updateProfile')->name('updateP
 Route::put('profile/edit/{id}', 'UserController@editProfile')->name('editProfile')->middleware('auth');
 Route::get('profile/show', 'UserController@showProfile')->name('showProfile')->middleware('auth');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-Route::resource('test' , 'TestController');
+Route::resource('calendar', 'CalendarController');
 Route::get('getData/{id}', 'TestController@getData')->name('getData')->middleware('auth');
+// Route::resource('test' , 'TestController');
 
 Route::name('admin')->namespace('Admin')->prefix('admin')->middleware('admin')->group(function () {	
 Route::get('/','DashboardController@index')->name('home');

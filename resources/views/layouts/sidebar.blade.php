@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="rose" data-background-color="black" data-image="{{ asset('../assets/img/sidebar-1.jpg')}}">
+<div id="sidebar" class="sidebar" data-color="rose" data-background-color="black" data-image="{{ asset('../assets/img/sidebar-1.jpg')}}">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -11,10 +11,10 @@
       <div class="sidebar-wrapper">
         <div class="user">
           <div class="photo">
-            @if(isset(Auth::user()->image))
-            <img {{-- src="../assets/img/faces/avatar.jpg" --}} src="{{asset('/storage/'.Auth::user()->image)}}" />
+            @if(file_exists( public_path() . '/images/users/'.Auth::user()->image) && isset(Auth::user()->image))
+            <img {{-- src="../assets/img/faces/avatar.jpg" --}} src="{{asset('/images/users/'.Auth::user()->image)}}" />
             @else
-               <img src="{{ asset('../../assets/img/faces/marc.jpg')}}"  />
+               <img src="{{ asset('../../assets/img/faces/avatar.png')}}"  />
             @endif
           </div>
           <div class="user-info">
@@ -134,6 +134,12 @@
               </ul>
             </div>
           </li>
+             <li class="nav-item {{ Request::is('calendar*') ? 'active' : '' }} ">
+            <a class="nav-link" href="{{ route('calendar.index') }}">
+              <i class="material-icons">date_range</i>
+              <p> Calendar </p>
+            </a>
+          </li>
         </ul>
 
       </ul>
@@ -169,6 +175,12 @@
               </ul>
             </div>
           </li>
+             <li class="nav-item {{ Request::is('calendar*') ? 'active' : '' }} ">
+            <a class="nav-link" href="{{ route('calendar.index') }}">
+              <i class="material-icons">date_range</i>
+              <p> Calendar </p>
+            </a>
+          </li>
       </ul>
       @else
       <ul class="nav">
@@ -178,12 +190,13 @@
               <p> Dashboard </p>
             </a>
           </li> 
-           <li class="nav-item {{-- {{ Request::is('/*') ? 'active' : '' }}  --}}">
-            <a class="nav-link" href="">
-              <i class="material-icons">article</i>
-              <p> Bloggs </p>
+          
+          <li class="nav-item {{ Request::is('calendar*') ? 'active' : '' }} ">
+            <a class="nav-link" href="{{ route('calendar.index') }}">
+              <i class="material-icons">date_range</i>
+              <p> Calendar </p>
             </a>
-          </li> 
+          </li>
       </ul>
       @endif
       </div>

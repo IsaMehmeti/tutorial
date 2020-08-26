@@ -49,19 +49,26 @@ class UserService
              if(isset($data['birth'])){
          $user->birth = $data['birth'];
            }
-         }
+         }/*mimes:jpeg,bmp,png|size:20000*/
            if (!isset($user->image)) {
             if(isset($data['image'])){
                 $img = $data['image'];
-                $filename = $img->getClientOriginalName();
-                $user->image = $img->storeAs('images/user' , $filename , 'public');
-            $percentage += 20;
+                $filename  = str_slug(time(), '-').'-'.$img->getClientOriginalName();
+                $path = public_path().'/images/users/'.$filename;
+                $upload_success = \Image::make($img->getRealPath())->fit(250,250)->save($path);
+                $user->image = $filename;
+                $percentage += 20;
+               
+
             }
         }else{
           if(isset($data['image'])){
-            $img = $data['image'];
-            $filename = $img->getClientOriginalName();
-            $user->image = $img->storeAs('images/user' , $filename , 'public');
+              UserService::deleteImage($user->image);
+              $img = $data['image'];
+              $filename  = str_slug(time(), '-').'-'.$img->getClientOriginalName();
+              $path = public_path().'/images/users/'.$filename;
+              $upload_success = \Image::make($img->getRealPath())->fit(250,250)->save($path);
+              $user->image = $filename;
           }
         }
          if($user->completion < 101){
@@ -73,7 +80,7 @@ class UserService
               $user->save();
           }
         }
-
+        
         public function editProfile($id, $data, $request)
         {
            $user = User::find($id);
@@ -109,7 +116,7 @@ class UserService
         }
           public function deleteImage($img)
         {
-            $filename =public_path().'/storage/'.$img;
+            $filename =public_path().'/images/users/'.$img;
             File::delete($filename);
         }
 

@@ -73,12 +73,11 @@
               <div class="col-md-4">
                 <div class="card card-product">
                   <div class="card-header card-header-image" data-header-animation="true">
-                    <a href="#pablo">
-                      @if(isset($blog->image))
-                      <img class="img" src="{{asset('/storage/'.$blog->image)}}">
+                        @if(file_exists( public_path() . '/images/blogs/'.$blog->image))
+                      <img class="img" src="{{asset('/images/blogs/'.$blog->image)}}">
                       @else
-                      <img class="img" src="../assets/img/card-2.jpg">
-                      @endif    
+                      <img class="img" src="../assets/img/clint-mckoy.jpg">
+                      @endif  
                     </a>
                   </div>
                   <div class="card-body">
@@ -86,15 +85,7 @@
                       <button type="button" class="btn btn-danger btn-link fix-broken-card">
                         <i class="material-icons">build</i> Fix {{$blog->title}}!
                       </button>
-                      <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="View">
-                        <i class="material-icons">art_track</i>
-                      </button>
-                      <button type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Edit">
-                        <i class="material-icons">edit</i>
-                      </button>
-                      <button type="button" class="btn btn-danger btn-link" rel="tooltip" data-placement="bottom" title="Remove">
-                        <i class="material-icons">close</i>
-                      </button>
+                   
                     </div>
                     <h4 class="card-title">
                       <a href="#pablo">{{$blog->title}}</a>

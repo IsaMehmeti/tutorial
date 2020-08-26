@@ -9,12 +9,12 @@
 			<div class="col-md-4">
 				<div class="card card-profile">
 	                <div class="card-avatar">
-                    @if(isset($user->image))
-	                   <a href="{{asset('/storage/'.$user->image)}}">
-                    <img class="img" src="{{asset('/storage/'.$user->image)}}">
+                   @if(file_exists( public_path() . '/images/users/'.$user->image) && isset($user->image))
+	                   <a href="{{asset('/images/user'.$user->image)}}">
+                    <img class="img" src="{{asset('/images/user'.$user->image)}}">
                     @else
-	                   <a href="{{ asset('../../assets/img/faces/marc.jpg')}}">
-                    <img class="img" src="{{ asset('../../assets/img/faces/marc.jpg')}}">
+	                   <a href="{{ asset('../../assets/img/faces/avatar.png')}}">
+                    <img class="img" src="{{ asset('../../assets/img/faces/avatar.png')}}">
                     @endif
                   </a>
 	                </div>

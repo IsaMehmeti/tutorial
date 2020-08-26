@@ -42,7 +42,7 @@
                           <div class="col-sm-4">
                             <div class="picture-container">
                               <div class="picture">
-                                <img src="../../assets/img/default-avatar.png" alt="" class="picture-src" id="wizardPicturePreview" title="">
+                                <img src="../../assets/img/default-avatar.png" alt="" class="picture-src" id="wizardPicturePreview" title="" style="width: 100%; height: 100%; object-fit: cover;object-position: center;" >
                                 <input type="file" id="wizard-picture" name="image">
                               </div>
                               <h6 class="description">Choose Picture</h6>
@@ -148,4 +148,16 @@
         </div>
 
 
+@endsection
+
+@section('custom_scripts')
+
+  <script type="text/javascript">
+    $(':file').on('change', function () {
+      // var value = $(this).val();
+      // var name = this.files[0].name;
+      $('.picture-src').attr('src',URL.createObjectURL(this.files[0]));
+    })
+  </script>
+  
 @endsection

@@ -1,9 +1,9 @@
  <!--   Core JS Files   -->
-  @yield('custom_footer')
   <script src="{{ asset('../assets/js/core/jquery.min.js')}}"></script>
   <script src="{{ asset('../assets/js/core/popper.min.js')}}"></script>
   <script src="{{ asset('../assets/js/core/bootstrap-material-design.min.js')}}"></script>
   <script src="{{ asset('../assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
+  @yield('custom_footer')
   <!-- Plugin for the momentJs  -->
   <script src="{{ asset('../assets/js/plugins/moment.min.js')}}"></script>
   <!--  Plugin for Sweet Alert -->
@@ -381,4 +381,5 @@
 
     });
   </script>
+
   

@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\Blog;
 use App\Services\UserService;
+use App\Services\BlogServices;
 
 class TestController extends Controller
 {
 
      protected $userService;
 
-   function __construct(UserService $userService)
+   function __construct(UserService $userService, BlogServices $blogservices)
     {
       $this->userService = $userService;
+      $this->blogservices = $blogservices;
     }
     /**
      * Display a listing of the resource.
@@ -53,8 +56,12 @@ class TestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $blog = new Blog;
+        $blog =Blog::create($data=$request->all());
+        return response()->json(['blog' => $blog]);
+            print_r('saved');
+         
     }
 
     /**
