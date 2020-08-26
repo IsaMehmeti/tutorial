@@ -101,6 +101,6 @@ class BlogsController extends Controller
     public function destroy($id)
     {   
         $this->blogServices->deleteBlogById($id);
-        return redirect()->back();
+        return redirect()->back()->with('danger','Deleted Successfully');
     }
 }
