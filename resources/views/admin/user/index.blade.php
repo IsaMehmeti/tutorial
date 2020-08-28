@@ -29,16 +29,15 @@
                           <th class="disabled-sorting text-right">Action</th>
                         </tr>
                       </thead>
-                  
                       <tbody>
                         @foreach($users as $user)
                         <tr id="row{{$user->id}}">
                           <td>{{$user->id}}</td>
                           <td>  <div class="photo">
-                          @if(isset($user->image))
-                          <img style="max-width: 50px" src="{{asset('/storage/'.$user->image)}}" />
+                          @if(file_exists( public_path() . '/images/users/'.$user->image) && isset($user->image))
+                          <img style="max-width: 50px" src="{{asset('/images/users/'.$user->image)}}" />
                           @else
-                             <img style="max-width: 50px" src="{{ asset('../../assets/img/faces/marc.jpg')}}"  />
+                             <img style="max-width: 50px" src="{{ asset('../../assets/img/faces/avatar.png')}}"  />
                           @endif
                         </div></td>
                           <td>{{$user->name}}</td>

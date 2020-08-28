@@ -9,13 +9,13 @@
                     <div class="card-icon">
                       <i class="material-icons">timeline</i>
                     </div>
-                    <h4 class="card-title">Profile Completed {{$user->completion}}%
+                    <h4 class="card-title">Profile Completed <span class="number">{{$user->completion}}</span  >%
                     </h4>
                   </div>
               <div class="card-body">
             
       				<div style="height: 30px;" class="progress-rose">
-      				  <div  class="progress-bar" role="progressbar" style="max-width: 100%; width: {{$user->completion}}%;" aria-valuenow="{{$user->completion}}" aria-valuemin="0" aria-valuemax="100">{{$user->completion}}%</div>
+      				  <div class="progress-bar" data-id="{{$user->completion}}" role="progressbar" style="max-width: 100%;max-height: 22px; display: inline-block; border-radius: 5px;" aria-valuenow="{{$user->completion}}" aria-valuemin="0" aria-valuemax="100"><span class="number">{{$user->completion}}  </span>%</div>
       				</div>
             </div>
         </div>
@@ -29,7 +29,7 @@
                   <div class="card-icon">
                     <i class="material-icons">perm_identity</i>
                   </div>
-                  <h4 class="card-title">Edit Profile
+                  <h4 class="card-title">Edit Profile 
                   </h4>
                 </div>
                 <div class="card-body">
@@ -118,4 +118,26 @@
           </div>
      </div>
 
+
+@endsection
+
+@section('custom_footer')
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js?ver=5.2.3'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js?ver=5.2.3'></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    id = $('.progress-bar').data('id');
+    $('.number').counterUp({delay:10,time:1250});
+function update_progress(_val){
+    if (_val <= id){
+      $('.progress-bar').css('width', _val.toString()+'%');
+      setTimeout(function(){
+         update_progress(_val+2);
+      }, 25);
+    }
+  }
+  update_progress(0);
+    
+  })
+  </script>
 @endsection

@@ -16,7 +16,7 @@
                     <h3 class="card-title">{{$user_count}}</h3>
                   </div>
                   <div class="card-footer">
-                  <p class="card-category">Favorite Users: </p>
+                  <p class="card-category nr">Favorite Users: </p>
                   {{$favorite_count}}
                   </div>
                 </div>
@@ -110,4 +110,14 @@
           </div>
         </div> 	
 
+@endsection
+
+@section('custom_footer')
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js?ver=5.2.3'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js?ver=5.2.3'></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    $('.card-title').counterUp({delay:10,time:500});
+  })
+  </script>
 @endsection

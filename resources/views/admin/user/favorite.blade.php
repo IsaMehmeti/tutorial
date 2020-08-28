@@ -10,8 +10,8 @@
 				<div class="card card-profile">
 	                <div class="card-avatar">
                    @if(file_exists( public_path() . '/images/users/'.$user->image) && isset($user->image))
-	                   <a href="{{asset('/images/user'.$user->image)}}">
-                    <img class="img" src="{{asset('/images/user'.$user->image)}}">
+	                   <a href="{{asset('/images/users/'.$user->image)}}">
+                    <img class="img" src="{{asset('/images/users/'.$user->image)}}">
                     @else
 	                   <a href="{{ asset('../../assets/img/faces/avatar.png')}}">
                     <img class="img" src="{{ asset('../../assets/img/faces/avatar.png')}}">
