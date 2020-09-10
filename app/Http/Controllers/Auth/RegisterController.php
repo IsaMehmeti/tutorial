@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Filter;
 
 class RegisterController extends Controller
 {
@@ -70,5 +71,15 @@ class RegisterController extends Controller
             'completion' => 40,
             'password' => Hash::make($data['password']),
         ]);
+
+
+    }
+   
+    public function createFilter()
+    {
+        $filter = new Filter;
+        $filter->color ='rose';
+        $filter->background_color ='black';
+        $filter->save();
     }
 }

@@ -45,9 +45,8 @@ class UserController extends Controller
         }else{
     	 return redirect()->route('dashboard')->with('status','Completed Successfully');
         }
-
-    
     }
+
      public function editProfile($id, UpdateUserRequest $request){
         $data = $request->all();
         $this->userService->editProfile($id, $data, $request);
@@ -60,5 +59,14 @@ class UserController extends Controller
           File::delete($filename);
       }
 
-      }
+       public function deleteProfile($id)
+    {
+        $this->userService->deleteUserById($id);
+        return redirect()->back();
+
+    }
+
+
+
+}
   

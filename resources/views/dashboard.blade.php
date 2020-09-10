@@ -3,7 +3,7 @@
 	
 
 @section('content')
-		
+   
 	 <div class="container-fluid">
             <div class="row">
               <div class="col-lg-3 col-md-6 col-sm-6">
@@ -13,7 +13,7 @@
                       <i class="material-icons">perm_identity</i>
                     </div>
                     <p class="card-category">Users</p>
-                    <h3 class="card-title">{{$user_count}}</h3>
+                    <h3 class="card-title s">{{$user_count}}</h3>
                   </div>
                   <div class="card-footer">
                   <p class="card-category nr">Favorite Users: </p>
@@ -28,7 +28,7 @@
                       <i class="material-icons">face</i>
                     </div>
                     <p class="card-category">Bloggers</p>
-                    <h3 class="card-title">{{$blogger_count}}</h3>
+                    <h3 class="card-title s">{{$blogger_count}}</h3>
                   </div>
                   <div class="card-footer">
                    
@@ -42,7 +42,7 @@
                       <i class="material-icons">account_box</i>
                     </div>
                     <p class="card-category">Admins</p>
-                    <h3 class="card-title">{{$admin_count}}</h3>
+                    <h3 class="card-title s">{{$admin_count}}</h3>
                   </div>
                   <div class="card-footer">
                     
@@ -56,7 +56,7 @@
                         <i class="material-icons">article</i>
                     </div>
                     <p class="card-category">Blogs</p>
-                    <h3 class="card-title">{{$blog_count}}</h3>
+                    <h3 class="card-title s">{{$blog_count}}</h3>
                   </div>
                   <div class="card-footer">
                    
@@ -88,7 +88,7 @@
                    
                     </div>
                     <h4 class="card-title">
-                      <a href="#pablo">{{$blog->title}}</a>
+                      {{$blog->title}}
                     </h4>
                     <div class="card-description">
                       {{$blog->desc}}
@@ -117,7 +117,7 @@
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js?ver=5.2.3'></script>
   <script type="text/javascript">
   $(document).ready(function () {
-    $('.card-title').counterUp({delay:10,time:500});
+    $('.s').counterUp({delay:10,time:500});
   })
   </script>
 @endsection

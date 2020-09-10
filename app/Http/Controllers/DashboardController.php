@@ -15,7 +15,7 @@ class DashboardController extends Controller
     }
 
     public function index()
-    {
+    {   
     	return view('dashboard' , [
     		'admin_count' => User::where('type', '1')->count(),
     		'blogger_count' => User::where('type', '2')->count(),

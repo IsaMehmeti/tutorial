@@ -19,7 +19,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('Accordion', require('./components/Accordion.vue').default);
+// import Accordion from './components/Accordion.vue';
+import List from './components/List.vue';
+// Vue.component('accordion', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,6 +30,21 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
+    
+
+    new Vue({
+      delimiters: ['{(', ')}'],
+      el: '#app',
+      components:{
+      	List
+      },
+
+
+      data: {
+        items: [
+        {id:1, title:'Title 1', description: 'Description for Title 1.'},
+        {id:2, title:'Title 2', description: 'Description for Title 2.'},
+        {id:3, title:'Title 3', description: 'Description for Title 3.'},
+        ],
+      },
+    });

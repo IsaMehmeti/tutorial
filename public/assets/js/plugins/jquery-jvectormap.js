@@ -778,10 +778,7 @@ jvm.SVGCanvasElement.prototype.applyTransformParams = function(
     this.scale = scale;
     this.transX = transX;
     this.transY = transY;
-    this.rootElement.node.setAttribute(
-        "transform",
-        "scale(" + scale + ") translate(" + transX + ", " + transY + ")"
-    );
+   
 };
 jvm.SVGShapeElement = function(name, config, style) {
     jvm.SVGShapeElement.parentClass.call(this, name, config);

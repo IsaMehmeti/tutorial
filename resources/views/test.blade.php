@@ -1,13 +1,12 @@
 @extends('layouts.admin')
 @section('page_name', 'Test')
 
-
 @section('custom_head')
-
 @endsection
 
+
 @section('content')
-<?php 
+{{-- <?php 
 use App\User;
 use App\Models\Blog;
 
@@ -18,7 +17,225 @@ use App\Models\Blog;
     array('name' => 'Parim', 'age' => 18, 'id'=> 2),
     array('name' => 'Diart', 'age' => 17, 'id'=> 3),
    ];
- ?>
+ ?> --}}
+    {{-- <h1 v-bind:title="menu" v-text="title"></h1> --}}
+    {{-- <p v-text="content"></p> --}}
+{{--     <ol>
+      <li v-for="todo in items" v-text="todo"></li>
+    </ol>
+    <input type="text" v-model="item">
+    <button @click="items.push(item)" >Add item</button> --}}
+{{--     <li v-for="item in items">
+      <span v-text="item.text"></span>
+      <p v-if="item.checked">Checked</p>
+      <p v-else>Not Checked</p>
+    </li> --}}
+{{--     <div>Price: {(price)}</div>
+    <input type="text" v-model="price">
+    <div>Tax: {(tax)}</div>
+    <div>Total: {( total )}</div> --}}
+  <div id="app">
+    <list></list>
+  </div>  
+@endsection
+
+@section('custom_scripts')
+<script src="{{asset('js/app.js')}}"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> --}}
+
+{{--   <script type="text/javascript">
+    Vue.component('container', {
+      delimiters: ['{(', ')}'],
+      props: ['item'],
+
+      template: `
+       <div> <p> {( item.title )}</p>
+        <a href='#' @click="toggle =! toggle"> Details </a>
+        <p v-if="toggle"> {( item.description )}</p>
+      </div>
+      `,
+      data: function (){
+        return{
+          toggle:false,
+        }
+      }
+    });
+
+    new Vue({
+      delimiters: ['{(', ')}'],
+      el: '#app',
+
+      data: {
+        items: [
+        {id:1, title:'Title 1', description: 'Description for Title 1.'},
+        {id:2, title:'Title 2', description: 'Description for Title 2.'},
+        {id:3, title:'Title 3', description: 'Description for Title 3.'},
+        ],
+      },
+    });
+
+  </script> --}}
+@endsection
+
+{{-- Vue js-Data --}}
+       {{--  title: 'My Title',
+        content: 'Lorem ipsum dolor sit, amet.',
+        menu: 'You are hovering this title'
+        item: '',
+        items: [
+          'item1',
+          'item2',
+        ],
+        items: [
+          {text: 'Isa', checked:true},
+          {text: 'Parim', checked:true},
+          {text: 'Shpend', checked:false},
+          {text: 'Diart', checked:true},
+        ],
+        price: '',
+      computed: {
+        tax: function(){
+          return this.price * 0.1;
+        },
+        total: function(){
+          return parseInt(this.price) + this.tax;
+        }
+      } --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- <script type="text/javascript">
+  function editModal(id, name) {
+     var url = '{{route('adminuser.index' )}}/'+id;
+     $('#exampleModal').modal('show'); 
+     $('#editModalForm').attr('action', url);
+     $('#user-name').text("Are you sure you want to delete: "+ name);
+     $('#name-input').attr('value', name);
+     $('#id-input').attr('value', id);
+  }
+</script>
+
+
+
+ function deleteUser(id, name){
+          var url = '{{route('adminuser.index' )}}/'+id;
+           $('#applicantDeleteModal').modal('show'); 
+           $('#deleteForm').attr('action', url);
+           $('#form').attr('action', url);
+           $('#message').text('Are u sure you want to delete: ' + name);
+           $('#modalLabel').text('User: ' + id);
+ --}}
+
+
+
+
+
 <!-- Button trigger modal -->
 {{-- <button class="btn btn-rose btn-fill" onclick="demo.showSwal('success-message')">Try me!<div class="ripple-container"></div></button>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -58,7 +275,7 @@ use App\Models\Blog;
  
      <!-- Script -->
   {{-- <p id="heading"></p> --}}
-
+{{-- 
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- jQuery CDN -->
     <div class="col-md-6">
               <div class="card ">
@@ -68,14 +285,14 @@ use App\Models\Blog;
                   </div>
                   <h4 class="card-title">Stacked Form</h4>
                 </div>
-                <div class="card-body ">
+                <div class="card-body "> --}}
                   {{-- <form action="{{route('test.store')}}" method="POST">
                     @csrf --}}
-                    <div class="form-group bmd-form-group">
+        {{--             <div class="form-group bmd-form-group">
                       <label for="exampleEmail" class="bmd-label-floating"> Name</label>
                       <input type="text" id="title" name="title" class="form-control" id="exampleEmail">
                     </div>
-                      {{-- <div class="form-group bmd-form-group">
+                      <div class="form-group bmd-form-group">
                         <label for="exampleEmail" class="bmd-label-floating">Email Address</label>
                         <input type="text" id="email" name="email" class="form-control" id="exampleEmail">
                       </div>
@@ -89,18 +306,17 @@ use App\Models\Blog;
                       </div>
                       <div class="form-check">
                      
-                      </div> --}}
+                      </div>
                 </div>
                 <div class="card-footer ">
                   <button id="insert" type="submit" class="btn btn-fill btn-rose">Submit</button>
                 </div>
-                {{-- </form> --}}
               </div>
-            </div>
+            </div> --}}
 {{-- sajkdaklsdaodskasdlkjadlkajdklahjaslkh qiuodhaosdhmaoidhoaidhjmapodmoadhmadosaldjaldsj --}}
 
 
-     <div class="container-fluid">
+    {{--  <div class="container-fluid">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
@@ -139,8 +355,8 @@ use App\Models\Blog;
             </div>
           </div>
         </div>
-      
-        <script type="text/javascript">
+       --}}
+     {{--    <script type="text/javascript">
  
               $(document).ready(function() {
                 $('#insert').on('click', function() {
@@ -195,7 +411,7 @@ use App\Models\Blog;
             });
 
 </script>
-        <script type="text/javascript"></script>
+        <script type="text/javascript"></script> --}}
            <!--  $('.table tbody tr').each(function(){
                
              $(this).find('.btn').click(function(){
@@ -305,31 +521,3 @@ use App\Models\Blog;
          });
        }
      </script> -->
-
-
-@endsection
-{{-- <script type="text/javascript">
-  function editModal(id, name) {
-     var url = '{{route('adminuser.index' )}}/'+id;
-     $('#exampleModal').modal('show'); 
-     $('#editModalForm').attr('action', url);
-     $('#user-name').text("Are you sure you want to delete: "+ name);
-     $('#name-input').attr('value', name);
-     $('#id-input').attr('value', id);
-  }
-</script>
-
-
-
- function deleteUser(id, name){
-          var url = '{{route('adminuser.index' )}}/'+id;
-           $('#applicantDeleteModal').modal('show'); 
-           $('#deleteForm').attr('action', url);
-           $('#form').attr('action', url);
-           $('#message').text('Are u sure you want to delete: ' + name);
-           $('#modalLabel').text('User: ' + id);
- --}}
-
-
-
-

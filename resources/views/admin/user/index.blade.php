@@ -44,12 +44,15 @@
                           <td>{{$user->email}}</td>
 
                           <td>
+                            @if($user->id == Auth::user()->id)
+                            @else
                             @if($user->type ==1)
                             <button id="changeStatusButton_{{$user->id}}" type="submit" onclick="changeStatus({{$user->id}},2)" class="btn btn-default">Admin</button> 
                             @elseif($user->type == 2)
                               <button id="changeStatusButton_{{$user->id}}" type="submit" onclick="changeStatus({{$user->id}},3)" class="btn btn-rose">Blogger</button>
                             @else 
                               <button id="changeStatusButton_{{$user->id}}" type="submit" onclick="changeStatus({{$user->id}},1)" class="btn btn-warning">User</button> 
+                              @endif
                               @endif
                           </td>
                           <td> 

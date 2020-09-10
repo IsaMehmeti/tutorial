@@ -1,4 +1,6 @@
-<div id="sidebar" class="sidebar" data-color="rose" data-background-color="black" data-image="{{ asset('../assets/img/sidebar-1.jpg')}}">
+   @foreach($filters as $filter)
+    <div id="sidebar" class="sidebar" data-id="{{$filter->id}}" data-color="{{$filter->color}}" data-background-color="{{$filter->background_color}}" data-image="{{ asset('../assets/img/sidebar-1.jpg')}}">
+      @endforeach
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -134,12 +136,7 @@
               </ul>
             </div>
           </li>
-             <li class="nav-item {{ Request::is('calendar*') ? 'active' : '' }} ">
-            <a class="nav-link" href="{{ route('calendar.index') }}">
-              <i class="material-icons">date_range</i>
-              <p> Calendar </p>
-            </a>
-          </li>
+            
         </ul>
 
       </ul>
@@ -175,12 +172,7 @@
               </ul>
             </div>
           </li>
-             <li class="nav-item {{ Request::is('calendar*') ? 'active' : '' }} ">
-            <a class="nav-link" href="{{ route('calendar.index') }}">
-              <i class="material-icons">date_range</i>
-              <p> Calendar </p>
-            </a>
-          </li>
+            
       </ul>
       @else
       <ul class="nav">
@@ -191,12 +183,7 @@
             </a>
           </li> 
           
-          <li class="nav-item {{ Request::is('calendar*') ? 'active' : '' }} ">
-            <a class="nav-link" href="{{ route('calendar.index') }}">
-              <i class="material-icons">date_range</i>
-              <p> Calendar </p>
-            </a>
-          </li>
+      
       </ul>
       @endif
       </div>

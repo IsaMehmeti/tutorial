@@ -19,10 +19,12 @@ Route::get('profile/complete', 'UserController@profile')->name('profile')->middl
 Route::put('profile/update/{id}', 'UserController@updateProfile')->name('updateProfile')->middleware('auth');
 Route::put('profile/edit/{id}', 'UserController@editProfile')->name('editProfile')->middleware('auth');
 Route::get('profile/show', 'UserController@showProfile')->name('showProfile')->middleware('auth');
+Route::delete('profile/delete/{id}', 'UserController@deleteProfile')->name('deleteProfile')->middleware('auth');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-Route::resource('calendar', 'CalendarController');
 Route::get('getData/{id}', 'TestController@getData')->name('getData')->middleware('auth');
-// Route::resource('test' , 'TestController');
+Route::post('/filter/{id}/{color}','FilterController@changeColor')->middleware('auth');
+Route::post('/filter/background/{id}/{color}','FilterController@changeBackground')->middleware('auth');
+Route::resource('test' , 'TestController');
 
 Route::name('admin')->namespace('Admin')->prefix('admin')->middleware('admin')->group(function () {	
 Route::get('/','DashboardController@index')->name('home');

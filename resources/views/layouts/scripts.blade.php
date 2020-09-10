@@ -382,4 +382,49 @@
     });
   </script>
 
+  {{-- Filter Done with AJAX --}}
+    <script type="text/javascript">
+    $(document).ready(function(){
+      color = $('.sidebar').data('color');
+      backgroundColor = $('.sidebar').data('background-color');
+      $('*[data-color="'+ color +'"]').addClass('active');
+      $('*[data-background-color="'+ backgroundColor +'"]').addClass('active');
+    })
+    //Change Color
+          function changeColor(id, color) {
+          $.ajax({
+              url: '/filter/' + id + '/' + color,
+              type: 'POST',
+              data: {
+                  "_token": "{{ csrf_token() }}",
+              },
+              success: function(data) {
+                 // console.log(data.color);
+
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+      }   
+      //Change Background
+       function changeBackground(id, back) {
+          $.ajax({
+              url: '/filter/background/' + id + '/' + back,
+              type: 'POST',
+              data: {
+                  "_token": "{{ csrf_token() }}",
+              },
+              success: function(data) {
+                  var myJSON = new Array(JSON.stringify(data));
+                  var obj = JSON.parse(myJSON);
+               
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+      }
+      </script>
+
   

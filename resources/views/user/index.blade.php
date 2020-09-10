@@ -3,6 +3,37 @@
 
 
 @section('content')
+  <style type="text/css">
+      .card-avatar {
+     -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+     -o-transition: all 1s ease;
+     -ms-transition: all 1s ease;
+     transition: all 1s ease;
+  }
+
+  .card-avatar:hover {
+     -webkit-filter: brightness(70%);
+     filter: brightness(70%);
+  }
+  .text {
+    position: absolute;
+    top: 0;
+    color:#f00;
+    background-color:rgba(255,255,255,0.8);
+    width: 100px;
+    height: 100px;
+    line-height:100px;
+    text-align: center;
+    z-index: 10;
+    opacity: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+  </style>
  <div class="col-md-8 col-12 mr-auto ml-auto">
       <div class="card">
                   <div class="card-header card-header-icon card-header-primary">
@@ -80,14 +111,22 @@
                         </div>
                       </div> --}}
                     </div>
+                     
                     @if($user->completion == 100)
-                    <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                    <button type="submit" class="btn btn-primary pull-right">Edit Profile</button>
                     @else
-                    <button type="submit" class="btn btn-primary pull-right" disabled>Update Profile</button>
-                    Complete profile to update.
+                    <button type="submit" class="btn btn-primary pull-right" disabled>Edit Profile</button>
+                    Complete profile to Edit.
                     @endif
                     <div class="clearfix"></div>
                   </form>
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group bmd-form-group">
+                            <button id="deleteAccBtn" type="button" class="btn btn-danger btn-block">Delete My Account</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -96,8 +135,10 @@
               <div class="card card-profile">
                 <div class="card-avatar">
                     @if(file_exists( public_path() . '/images/users/'.$user->image))
-                      <a href="{{asset('/images/users/'.$user->image)}}">
                     <img class="img" src="{{asset('/images/users/'.$user->image)}}">
+                       <span class="text">
+                          14
+                      </span>
                     @else
                     <img class="img" src="{{ asset('../../assets/img/faces/avatar.png')}}">
                     @endif
@@ -117,6 +158,32 @@
             @endif
           </div>
      </div>
+
+{{-- Modal For Delete Account --}}
+     <div class="modal fade" id="accountDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        Are you sure. You will not be able to undo this action.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="{{route('deleteProfile', $user->id)}}" method="POST">
+          @csrf
+          @method('Delete')
+        <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- Modal For Delete Account --}}
 
 
 @endsection
@@ -139,5 +206,12 @@ function update_progress(_val){
   update_progress(0);
     
   })
+  $('#deleteAccBtn').on('click', function(){
+    $('#accountDeleteModal').modal('show');
+
+  })
+
+  // $('.card-avatar').on('mouseenter', function(){
+  // })
   </script>
 @endsection
