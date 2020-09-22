@@ -46,7 +46,7 @@ class TestController extends Controller
      */
     public function create()
     {
-        //
+        return User::all();
     }
 
     /**

@@ -1954,22 +1954,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'List',
-  components: {
-    Dropdown: _Dropdown_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
+  components: {},
   data: function data() {
-    return {
-      dropdownResult: ''
-    };
+    return {};
   },
-  methods: {
-    optionUpdate: function optionUpdate(value) {
-      this.dropdownResult = value;
-    }
+  methods: {// optionUpdate: function(value){
+    //   this.dropdownResult = value
+    // }
   }
 });
 
@@ -37633,20 +37627,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c(
-      "div",
-      { staticClass: "col-md-8" },
-      [
-        _c("h3", { domProps: { textContent: _vm._s(_vm.dropdownResult) } }),
-        _vm._v(" "),
-        _c("dropdown", { on: { "update:option": _vm.optionUpdate } })
-      ],
-      1
-    )
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "col-md-8" }, [_c("h3")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -49833,6 +49825,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -49856,23 +49849,22 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 new Vue({
   delimiters: ['{(', ')}'],
   el: '#app',
-  components: {
-    List: _components_List_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  // components:{
+  // 	List
+  // },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/users').then(function (response) {
+      return _this.users = response.data;
+    })["catch"](function (error) {
+      return _this.users = [{
+        name: 'No posts Found'
+      }];
+    });
   },
   data: {
-    items: [{
-      id: 1,
-      title: 'Title 1',
-      description: 'Description for Title 1.'
-    }, {
-      id: 2,
-      title: 'Title 2',
-      description: 'Description for Title 2.'
-    }, {
-      id: 3,
-      title: 'Title 3',
-      description: 'Description for Title 3.'
-    }]
+    users: null
   }
 });
 

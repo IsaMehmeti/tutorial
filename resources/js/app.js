@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.axios = require('axios');
 
 /**
  * The following block of code may be used to automatically register your
@@ -31,20 +32,21 @@ import List from './components/List.vue';
  */
 
     
+    // new Vue({
+    //   delimiters: ['{(', ')}'],
+    //   el: '#app',
+    //   // components:{
+    //   // 	List
+    //   // },
 
-    new Vue({
-      delimiters: ['{(', ')}'],
-      el: '#app',
-      components:{
-      	List
-      },
-
-
-      data: {
-        items: [
-        {id:1, title:'Title 1', description: 'Description for Title 1.'},
-        {id:2, title:'Title 2', description: 'Description for Title 2.'},
-        {id:3, title:'Title 3', description: 'Description for Title 3.'},
-        ],
-      },
-    });
+    //   mounted: function () {
+    //     axios.get('/users')
+    //     .then(response => this.users = response.data)
+    //     .catch(error => this.users = [{name: 'No posts Found'}]);
+    //   },
+    //   data: {
+    //      users: null
+        
+        
+    //   },
+    // });

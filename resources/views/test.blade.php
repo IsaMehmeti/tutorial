@@ -35,12 +35,16 @@ use App\Models\Blog;
     <div>Tax: {(tax)}</div>
     <div>Total: {( total )}</div> --}}
   <div id="app">
-    <list></list>
+    {{-- <list></list> --}}
+    {{-- <li v-for="item in items" v-text="item.title"></li> --}}
+    <ul>
+      <li v-for="user in users" > {(user.id)}.{(user.name)}  </li>
+    </ul>
   </div>  
 @endsection
 
 @section('custom_scripts')
-<script src="{{asset('js/app.js')}}"></script>
+{{-- <script src="{{asset('js/app.js')}}"></script> --}}
 {{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> --}}
 
 {{--   <script type="text/javascript">

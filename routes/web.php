@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','DashboardController@index')->name('dashboard');
+Route::get('/users','TestController@create');
 Route::get('profile/complete', 'UserController@profile')->name('profile')->middleware(['auth', 'completed']);
 Route::put('profile/update/{id}', 'UserController@updateProfile')->name('updateProfile')->middleware('auth');
 Route::put('profile/edit/{id}', 'UserController@editProfile')->name('editProfile')->middleware('auth');
@@ -24,7 +25,7 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('getData/{id}', 'TestController@getData')->name('getData')->middleware('auth');
 Route::post('/filter/{id}/{color}','FilterController@changeColor')->middleware('auth');
 Route::post('/filter/background/{id}/{color}','FilterController@changeBackground')->middleware('auth');
-Route::resource('test' , 'TestController');
+// Route::resource('test' , 'TestController');
 
 Route::name('admin')->namespace('Admin')->prefix('admin')->middleware('admin')->group(function () {	
 Route::get('/','DashboardController@index')->name('home');

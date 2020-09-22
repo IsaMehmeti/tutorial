@@ -2,8 +2,7 @@
 <template>
     <div class="container">
             <div class="col-md-8">
-                 <h3 v-text="dropdownResult"></h3>
-                 <dropdown @update:option="optionUpdate"></dropdown> 
+                 <h3 ></h3>
               </div>
         </div>
 </template>
@@ -13,17 +12,16 @@
   export default{
       name: 'List', 
       components: {
-        Dropdown,
       },
       data: function(){
         return{
-          dropdownResult: '',
         }
       },
       methods:{
-        optionUpdate: function(value){
-          this.dropdownResult = value
-        }
+        // optionUpdate: function(value){
+        //   this.dropdownResult = value
+        // }
+
       }
     };
 </script>
