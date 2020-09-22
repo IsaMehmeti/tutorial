@@ -37,7 +37,7 @@ class UserController extends Controller
     public function updateProfile($id, UpdateUserRequest $request)
     {	
       $data = $request->all();
-    	$this->userService->completeUser($id, $data);
+    	$this->userService->completeUser($id, $data, $request);
 
         $user = $this->userService->getUserById(Auth::id());
         if ($user->completion == 100) {

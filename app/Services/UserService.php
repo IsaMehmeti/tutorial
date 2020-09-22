@@ -25,7 +25,7 @@ class UserService
       return User::where('type', $type)->count();
     }
 
-     public function completeUser($id, $data){
+     public function completeUser($id, $data, $request){
         $user = User::find($id);
             $user->name = $data['name'];
             $user->email = $data['email'];
@@ -48,11 +48,17 @@ class UserService
          }else{
              if(isset($data['birth'])){
          $user->birth = $data['birth'];
+              $validatedData = $request->validate([
+                      'birth' => 'required|date|before:-18 years',
+                       ]);  
            }
-         }/*mimes:jpeg,bmp,png|size:20000*/
+         }
            if (!isset($user->image)) {
             if(isset($data['image'])){
                 $img = $data['image'];
+                      $validatedData = $request->validate([
+                      'image' => 'required|image|mimes:jpeg,bmp,png|',
+                       ]);   
                 $filename  = str_slug(time(), '-').'-'.$img->getClientOriginalName();
                 $path = public_path().'/images/users/'.$filename;
                 $upload_success = \Image::make($img->getRealPath())->fit(250,250)->save($path);
@@ -65,6 +71,9 @@ class UserService
           if(isset($data['image'])){
               UserService::deleteImage($user->image);
               $img = $data['image'];
+                   $validatedData = $request->validate([
+                      'image' => 'required|image|mimes:jpeg,bmp,png',
+                       ]); 
               $filename  = str_slug(time(), '-').'-'.$img->getClientOriginalName();
               $path = public_path().'/images/users/'.$filename;
               $upload_success = \Image::make($img->getRealPath())->fit(250,250)->save($path);

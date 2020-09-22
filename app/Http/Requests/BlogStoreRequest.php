@@ -26,7 +26,7 @@ class BlogStoreRequest extends FormRequest
         return [
             'title' => 'required', 
             'desc' => 'required',
-            'image' => 'required',
+            'image' => 'required|image',
         ];
     }
 }
