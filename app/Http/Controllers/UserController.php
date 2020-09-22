@@ -66,6 +66,21 @@ class UserController extends Controller
 
     }
 
+       public function changeColor($id, $color)
+      {
+          $user = User::find($id);
+          $user->filter_color = $color;
+          $user->save();
+          return response()->json($user);
+      }   
+      public function changeBackground($id, $back)
+      {
+          $user = User::find($id);
+          $user->filter_bgColor = $back;
+          $user->save();
+          return response()->json($user);
+      } 
+
 
 
 }

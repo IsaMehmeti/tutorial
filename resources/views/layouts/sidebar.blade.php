@@ -1,6 +1,5 @@
-   @foreach($filters as $filter)
-    <div id="sidebar" class="sidebar" data-id="{{$filter->id}}" data-color="{{$filter->color}}" data-background-color="{{$filter->background_color}}" data-image="{{ asset('../assets/img/sidebar-1.jpg')}}">
-      @endforeach
+   
+    <div id="sidebar" class="sidebar" data-id="{{Auth::user()->id}}" data-color="{{Auth::user()->filter_color}}" data-background-color="{{Auth::user()->filter_bgColor}}" data-image="{{ asset('../assets/img/sidebar-1.jpg')}}">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 

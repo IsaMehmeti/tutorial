@@ -8,13 +8,12 @@
         <li class="adjustments-line">
           <a href="javascript:void(0)" class="switch-trigger active-color">
             <div class="badge-colors ml-auto mr-auto">
-              @foreach($filters as $filter)
-              <span class="badge filter badge-purple" onclick="changeColor({{$filter->id}}, 'purple')" data-color="purple"></span>
-              <span class="badge filter badge-azure" onclick="changeColor({{$filter->id}}, 'azure')" data-color="azure"></span>
-              <span class="badge filter badge-green" onclick="changeColor({{$filter->id}}, 'green')" data-color="green"></span>
-              <span class="badge filter badge-warning" onclick="changeColor({{$filter->id}}, 'orange')" data-color="orange"></span>
-              <span class="badge filter badge-danger" onclick="changeColor({{$filter->id}}, 'danger')" data-color="danger"></span>
-              <span class="badge filter badge-rose " onclick="changeColor({{$filter->id}}, 'rose')" data-color="rose"></span>
+              <span class="badge filter badge-purple" onclick="changeColor({{Auth::user()->id}}, 'purple')" data-color="purple"></span>
+              <span class="badge filter badge-azure" onclick="changeColor({{Auth::user()->id}}, 'azure')" data-color="azure"></span>
+              <span class="badge filter badge-green" onclick="changeColor({{Auth::user()->id}}, 'green')" data-color="green"></span>
+              <span class="badge filter badge-warning" onclick="changeColor({{Auth::user()->id}}, 'orange')" data-color="orange"></span>
+              <span class="badge filter badge-danger" onclick="changeColor({{Auth::user()->id}}, 'danger')" data-color="danger"></span>
+              <span class="badge filter badge-rose " onclick="changeColor({{Auth::user()->id}}, 'rose')" data-color="rose"></span>
             </div>
             <div class="clearfix"></div>
           </a>
@@ -23,12 +22,11 @@
         <li class="adjustments-line">
           <a href="javascript:void(0)" class="switch-trigger background-color">
             <div class="ml-auto mr-auto">
-              <span id="black" class="badge filter badge-black " onclick="changeBackground({{$filter->id}}, 'black')" data-background-color="black"></span>
-              <span id="white" class="badge filter badge-white" onclick="changeBackground({{$filter->id}}, 'white')" data-background-color="white"></span>
-              <span id="red" class="badge filter badge-red" onclick="changeBackground({{$filter->id}}, 'red')" data-background-color="red"></span>
+              <span id="black" class="badge filter badge-black " onclick="changeBackground({{Auth::user()->id}}, 'black')" data-background-color="black"></span>
+              <span id="white" class="badge filter badge-white" onclick="changeBackground({{Auth::user()->id}}, 'white')" data-background-color="white"></span>
+              <span id="red" class="badge filter badge-red" onclick="changeBackground({{Auth::user()->id}}, 'red')" data-background-color="red"></span>
             </div>
             <div class="clearfix"></div>
-              @endforeach
           </a>
         </li>
         <li class="adjustments-line">

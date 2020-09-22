@@ -23,8 +23,8 @@ Route::get('profile/show', 'UserController@showProfile')->name('showProfile')->m
 Route::delete('profile/delete/{id}', 'UserController@deleteProfile')->name('deleteProfile')->middleware('auth');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('getData/{id}', 'TestController@getData')->name('getData')->middleware('auth');
-Route::post('/filter/{id}/{color}','FilterController@changeColor')->middleware('auth');
-Route::post('/filter/background/{id}/{color}','FilterController@changeBackground')->middleware('auth');
+Route::post('/filter/{id}/{color}','UserController@changeColor')->middleware('auth');
+Route::post('/filter/background/{id}/{color}','UserController@changeBackground')->middleware('auth');
 // Route::resource('test' , 'TestController');
 
 Route::name('admin')->namespace('Admin')->prefix('admin')->middleware('admin')->group(function () {	

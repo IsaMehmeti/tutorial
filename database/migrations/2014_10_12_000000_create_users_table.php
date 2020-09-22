@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('image')->nullable();
             $table->smallInteger('type')->default(3);
             $table->integer('completion');
+            $table->string('filter_color')->default('rose');
+            $table->string('filter_bgColor')->default('black');
             $table->boolean('favorite')->default(0);
             $table->rememberToken();
             $table->timestamps();
